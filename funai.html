@@ -1,0 +1,2152 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#020817">
+<title>Khankir Chele AI</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#020817;
+    --card:#06142b;
+    --card2:#081b38;
+    --blue:#008cff;
+    --cyan:#00eaff;
+    --purple:#9d22ff;
+    --pink:#ff3cf7;
+    --green:#00ffae;
+    --white:#ffffff;
+    --muted:#aebbd0;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(0,100,255,.25), transparent 30%),
+        radial-gradient(circle at 90% 15%, rgba(157,34,255,.22), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(0,234,255,.12), transparent 35%),
+        #020817;
+    color:white;
+    font-family:"Anek Bangla","Inter",sans-serif;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        linear-gradient(120deg, transparent 0%, rgba(0,140,255,.08) 35%, transparent 36%),
+        linear-gradient(300deg, transparent 0%, rgba(157,34,255,.07) 40%, transparent 41%);
+}
+
+.app{
+    width:100%;
+    max-width:950px;
+    min-height:100vh;
+    margin:auto;
+    padding:18px;
+    position:relative;
+}
+
+/* HEADER */
+
+.header{
+    height:78px;
+    border:1px solid rgba(0,221,255,.65);
+    border-radius:24px;
+    background:
+        linear-gradient(135deg,rgba(7,29,62,.96),rgba(2,12,31,.96));
+    box-shadow:
+        0 0 15px rgba(0,145,255,.35),
+        0 0 35px rgba(0,145,255,.12),
+        inset 0 0 25px rgba(0,145,255,.05);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 18px;
+    position:relative;
+    overflow:hidden;
+}
+
+.header::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:2px;
+    right:-30px;
+    top:0;
+    background:linear-gradient(90deg,transparent,#00eaff,#a400ff);
+    box-shadow:0 0 15px #00eaff;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.robot{
+    width:52px;
+    height:52px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    background:linear-gradient(145deg,#071f46,#08102a);
+    border:1px solid #00bfff;
+    box-shadow:
+        0 0 12px rgba(0,234,255,.7),
+        inset 0 0 15px rgba(0,234,255,.12);
+}
+
+.brand h1{
+    font-family:Georgia,serif;
+    font-size:23px;
+    letter-spacing:.3px;
+}
+
+.brand p{
+    color:#8da2c0;
+    font-size:12px;
+    margin-top:2px;
+}
+
+.online{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border:1px solid rgba(0,255,174,.5);
+    border-radius:30px;
+    padding:8px 14px;
+    color:#00ffae;
+    font-weight:700;
+    font-size:13px;
+    box-shadow:0 0 12px rgba(0,255,174,.13);
+}
+
+.online-dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#00ffae;
+    box-shadow:0 0 10px #00ffae;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        opacity:.35;
+        transform:scale(.7);
+    }
+}
+
+/* WELCOME */
+
+.welcome{
+    margin-top:18px;
+    padding:25px 20px;
+    border-radius:25px;
+    border:1px solid rgba(0,162,255,.4);
+    background:
+        radial-gradient(circle at 50% 0%,rgba(0,174,255,.13),transparent 55%),
+        rgba(3,16,36,.85);
+    text-align:center;
+    box-shadow:
+        0 0 25px rgba(0,120,255,.13),
+        inset 0 0 30px rgba(0,120,255,.04);
+}
+
+.welcome-badge{
+    display:inline-flex;
+    padding:7px 18px;
+    border-radius:30px;
+    border:1px solid transparent;
+    border-image:linear-gradient(90deg,#ff28f4,#00eaff) 1;
+    background:rgba(5,20,45,.8);
+    color:#d7eaff;
+    font-size:13px;
+    font-weight:700;
+    box-shadow:0 0 14px rgba(0,234,255,.12);
+}
+
+.welcome h2{
+    margin-top:15px;
+    font-family:Georgia,serif;
+    font-size:clamp(27px,6vw,42px);
+    background:linear-gradient(90deg,#fff,#00eaff,#b72cff,#fff);
+    background-size:250% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:shine 5s linear infinite;
+}
+
+@keyframes shine{
+    to{
+        background-position:250% center;
+    }
+}
+
+.welcome p{
+    margin-top:8px;
+    color:#aebbd0;
+    font-size:14px;
+}
+
+/* CHAT */
+
+.chat-box{
+    margin-top:18px;
+    height:calc(100vh - 315px);
+    min-height:430px;
+    max-height:650px;
+    overflow-y:auto;
+    padding:20px 12px 25px;
+    border-radius:25px;
+    border:1px solid rgba(0,174,255,.35);
+    background:
+        linear-gradient(180deg,rgba(4,19,43,.92),rgba(2,11,27,.95));
+    box-shadow:
+        0 0 30px rgba(0,120,255,.12),
+        inset 0 0 30px rgba(0,120,255,.04);
+    scroll-behavior:smooth;
+}
+
+.chat-box::-webkit-scrollbar{
+    width:5px;
+}
+
+.chat-box::-webkit-scrollbar-thumb{
+    background:linear-gradient(#008cff,#a000ff);
+    border-radius:20px;
+}
+
+/* MESSAGE */
+
+.message{
+    display:flex;
+    margin:12px 4px;
+    animation:messageIn .3s ease;
+}
+
+@keyframes messageIn{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.message.user{
+    justify-content:flex-end;
+}
+
+.message.ai{
+    justify-content:flex-start;
+}
+
+.bubble-wrap{
+    max-width:82%;
+}
+
+.bubble{
+    padding:12px 15px;
+    border-radius:18px;
+    font-size:15px;
+    line-height:1.55;
+    word-break:break-word;
+    position:relative;
+    white-space:pre-wrap;
+}
+
+.ai .bubble{
+    background:
+        linear-gradient(135deg,rgba(8,31,65,.98),rgba(4,20,43,.98));
+    border:1px solid rgba(0,188,255,.4);
+    border-top-left-radius:5px;
+    box-shadow:
+        0 0 14px rgba(0,145,255,.10),
+        inset 0 0 14px rgba(0,145,255,.04);
+}
+
+.user .bubble{
+    background:
+        linear-gradient(135deg,#4012a2,#075fd0);
+    border:1px solid rgba(0,238,255,.5);
+    border-top-right-radius:5px;
+    box-shadow:
+        0 0 16px rgba(72,40,255,.22);
+}
+
+.sender{
+    font-size:11px;
+    margin-bottom:4px;
+    color:#8da6c8;
+}
+
+.user .sender{
+    text-align:right;
+    color:#9edcff;
+}
+
+.copy-btn{
+    margin-top:6px;
+    border:0;
+    background:transparent;
+    color:#7d9abb;
+    font-size:11px;
+    cursor:pointer;
+    padding:2px 4px;
+}
+
+.copy-btn:hover{
+    color:#00eaff;
+}
+
+/* TYPING */
+
+.typing{
+    display:flex;
+    gap:5px;
+    align-items:center;
+    padding:7px 2px;
+}
+
+.typing span{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#00eaff;
+    box-shadow:0 0 8px #00eaff;
+    animation:typing 1s infinite;
+}
+
+.typing span:nth-child(2){
+    animation-delay:.15s;
+}
+
+.typing span:nth-child(3){
+    animation-delay:.3s;
+}
+
+@keyframes typing{
+    0%,60%,100%{
+        transform:translateY(0);
+        opacity:.4;
+    }
+
+    30%{
+        transform:translateY(-5px);
+        opacity:1;
+    }
+}
+
+/* INPUT */
+
+.input-area{
+    margin-top:15px;
+    display:flex;
+    gap:10px;
+    align-items:flex-end;
+}
+
+.input-wrap{
+    flex:1;
+    position:relative;
+}
+
+#userInput{
+    width:100%;
+    min-height:58px;
+    max-height:130px;
+    resize:none;
+    padding:17px 18px;
+    padding-right:48px;
+    color:#fff;
+    background:rgba(3,16,35,.95);
+    border:1px solid rgba(0,178,255,.55);
+    border-radius:19px;
+    outline:none;
+    font-family:inherit;
+    font-size:15px;
+    box-shadow:
+        0 0 16px rgba(0,130,255,.10),
+        inset 0 0 15px rgba(0,130,255,.04);
+}
+
+#userInput:focus{
+    border-color:#00eaff;
+    box-shadow:
+        0 0 18px rgba(0,234,255,.18),
+        inset 0 0 15px rgba(0,130,255,.05);
+}
+
+#userInput::placeholder{
+    color:#647b9b;
+}
+
+.send-btn{
+    width:58px;
+    height:58px;
+    border:none;
+    border-radius:18px;
+    cursor:pointer;
+    color:white;
+    font-size:23px;
+    background:linear-gradient(135deg,#9b18ff,#008cff,#00d9ff);
+    box-shadow:
+        0 0 18px rgba(0,179,255,.38),
+        inset 0 0 10px rgba(255,255,255,.12);
+    transition:.2s;
+}
+
+.send-btn:hover{
+    transform:translateY(-2px) scale(1.03);
+    box-shadow:
+        0 0 25px rgba(0,234,255,.5);
+}
+
+.send-btn:active{
+    transform:scale(.94);
+}
+
+/* BOTTOM */
+
+.bottom-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:9px;
+    padding:0 5px;
+}
+
+.hint{
+    color:#5f7593;
+    font-size:11px;
+}
+
+.clear-btn{
+    border:1px solid rgba(255,70,150,.35);
+    background:rgba(30,5,30,.45);
+    color:#ff8fc8;
+    border-radius:10px;
+    padding:5px 10px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:11px;
+}
+
+.clear-btn:hover{
+    border-color:#ff4aa8;
+    box-shadow:0 0 10px rgba(255,50,150,.2);
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    margin:15px 0 5px;
+    color:#687e9c;
+    font-size:11px;
+}
+
+.footer strong{
+    color:#00d9ff;
+    text-shadow:0 0 8px rgba(0,217,255,.5);
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .app{
+        padding:10px;
+    }
+
+    .header{
+        height:68px;
+        padding:8px 12px;
+        border-radius:20px;
+    }
+
+    .robot{
+        width:45px;
+        height:45px;
+        font-size:23px;
+    }
+
+    .brand h1{
+        font-size:18px;
+    }
+
+    .brand p{
+        font-size:10px;
+    }
+
+    .online{
+        padding:7px 10px;
+        font-size:11px;
+    }
+
+    .welcome{
+        padding:20px 14px;
+        border-radius:21px;
+    }
+
+    .welcome h2{
+        font-size:29px;
+    }
+
+    .welcome p{
+        font-size:12px;
+    }
+
+    .chat-box{
+        height:calc(100vh - 310px);
+        min-height:390px;
+        padding:15px 6px 20px;
+        border-radius:20px;
+    }
+
+    .bubble-wrap{
+        max-width:89%;
+    }
+
+    .bubble{
+        font-size:14px;
+        padding:10px 12px;
+    }
+
+    #userInput{
+        min-height:54px;
+        font-size:14px;
+    }
+
+    .send-btn{
+        width:54px;
+        height:54px;
+    }
+
+    .hint{
+        font-size:9px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <div class="brand">
+
+        <div class="robot">
+            🤖
+        </div>
+
+        <div>
+            <h1>Khankir Chele AI</h1>
+            <p>Smart Default AI Assistant</p>
+        </div>
+
+    </div>
+
+    <div class="online">
+
+        <span class="online-dot"></span>
+
+        Online
+
+    </div>
+
+</header>
+
+
+<section class="welcome">
+
+    <div class="welcome-badge">
+        ✨ SMART CHATBOT
+    </div>
+
+    <h2>
+        ওয়েলকাম টু খানকির ছেলে AI তে
+    </h2>
+
+    <p>
+        বাংলা • Banglish • English — তোমার ভাষাতেই উত্তর দেওয়ার চেষ্টা করি 😊
+    </p>
+
+</section>
+
+
+<main id="chatBox" class="chat-box"></main>
+
+
+<div class="input-area">
+
+    <div class="input-wrap">
+
+        <textarea
+            id="userInput"
+            rows="1"
+            placeholder="এখানে প্রশ্ন লিখুন..."
+            autocomplete="off"
+        ></textarea>
+
+    </div>
+
+    <button
+        class="send-btn"
+        id="sendBtn"
+        title="Send"
+    >
+        ➤
+    </button>
+
+</div>
+
+
+<div class="bottom-row">
+
+    <span class="hint">
+        Enter = Send • Shift + Enter = New Line
+    </span>
+
+    <button
+        class="clear-btn"
+        id="clearBtn"
+    >
+        🗑 Clear Chat
+    </button>
+
+</div>
+
+
+<footer class="footer">
+
+    Khankir Chele AI • Developer
+    <strong>KM ZIHAD</strong>
+
+</footer>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   KHANKIR CHELE AI
+   NO API REQUIRED
+   ========================================================= */
+
+
+/* =========================================================
+   DEFAULT RESPONSES
+   ========================================================= */
+
+const defaultResponses = [
+
+/* ================= GREETING ================= */
+
+{
+    keywords:[
+        "হাই",
+        "হ্যালো",
+        "হেলো",
+        "hello",
+        "hi",
+        "hey",
+        "হাই কেমন",
+        "হ্যালো কেমন"
+    ],
+
+    bn:"হ্যালো! 😊 অবশেষে আসলা! বলো, কী জানতে চাও? 😎",
+
+    en:"Hello! 😊 Finally you are here! Tell me, what do you want to know? 😎",
+
+    banglish:"Hello! 😊 Obosheshe asla! Bolo, ki jante chao? 😎"
+},
+
+
+/* ================= HOW ARE YOU ================= */
+
+{
+    keywords:[
+        "কেমন আছো",
+        "কেমন আছেন",
+        "কেমন আছ",
+        "কেমন আছিস",
+        "কেমন আছেন আপনি",
+        "কেমন আছো তুমি",
+        "kemon aco",
+        "kemon acho",
+        "kemon aso",
+        "kmn aco",
+        "kmn acho",
+        "kmn aso",
+        "kemon acen",
+        "kemon achen",
+        "how are you",
+        "how r you",
+        "how are u",
+        "how r u"
+    ],
+
+    bn:"আমি ভালো আছি, তুমি কেমন আছে?😊 অনেকদিন পর আসলা, একদিন কোথায় ছিলা?🤔",
+
+    en:"I'm good! 😊 How are you? Long time no see! Where were you all these days? 🤔",
+
+    banglish:"Ami valo achi 😊 Tumi kemon acho? Onekdin por asla, ekdin kothay chila? 🤔"
+},
+
+
+/* ================= WHAT'S UP ================= */
+
+{
+    keywords:[
+        "কি খবর",
+        "কী খবর",
+        "খবর কি",
+        "খবর কী",
+        "কি অবস্থা",
+        "কী অবস্থা",
+        "ki khobor",
+        "ki obostha",
+        "khobor ki",
+        "whats up",
+        "what's up"
+    ],
+
+    bn:"এই তো ভালোই আছি 😎 তোমার খবর কী? এতদিন পর দেখা দিলা যে! 😂",
+
+    en:"I'm doing great 😎 What about you? You finally showed up after so long! 😂",
+
+    banglish:"Ei to valo achi 😎 Tomar khobor ki? Eto din por dekha dila je! 😂"
+},
+
+
+/* ================= THANK YOU ================= */
+
+{
+    keywords:[
+        "ধন্যবাদ",
+        "অনেক ধন্যবাদ",
+        "থ্যাংক ইউ",
+        "thanks",
+        "thank you",
+        "thanks bro",
+        "thankyou"
+    ],
+
+    bn:"আরে ধন্যবাদ দেওয়ার কী আছে! 😎 পাশে আছি, প্রশ্ন করতে থাকো।",
+
+    en:"No need to thank me! 😎 I'm here, keep asking questions.",
+
+    banglish:"Are thanks dewar ki ache! 😎 Pashe achi, question korte thako."
+},
+
+
+/* ================= BYE ================= */
+
+{
+    keywords:[
+        "বাই",
+        "বিদায়",
+        "আসি",
+        "পরে কথা হবে",
+        "bye",
+        "goodbye",
+        "see you",
+        "see ya",
+        "allah hafez"
+    ],
+
+    bn:"আচ্ছা তাহলে যাও 😭 আবার কিন্তু আসবা! ভালো থেকো 😊",
+
+    en:"Alright, take care! 😭 Come back again! Stay well 😊",
+
+    banglish:"Accha tahole jao 😭 Abar kintu asba! Valo theko 😊"
+},
+
+
+/* ================= WHO ARE YOU ================= */
+
+{
+    keywords:[
+        "তুমি কে",
+        "আপনি কে",
+        "কে তুমি",
+        "তোর পরিচয় কি",
+        "তোমার পরিচয় কি",
+        "তোমার নাম কি",
+        "তোমার নাম কী",
+        "who are you",
+        "what are you",
+        "who r you",
+        "your name",
+        "what is your name"
+    ],
+
+    bn:"আমি হলাম খানকির ছেলে AI 🤖😎 তোমার সাথে গল্প, মজা আর কিছু predefined প্রশ্নের উত্তর দেওয়ার জন্য তৈরি।",
+
+    en:"I am Khankir Chele AI 🤖😎 I was created to chat with you, have some fun, and answer predefined questions.",
+
+    banglish:"Ami holam Khankir Chele AI 🤖😎 Tomar sathe golpo, moja ar kichu predefined question-er answer dewar jonno create kora."
+},
+
+
+/* ================= DEVELOPER ================= */
+
+{
+    keywords:[
+        "তোমাকে কে বানিয়েছে",
+        "তোমাকে কে তৈরি করেছে",
+        "তোমার ডেভেলপার কে",
+        "ডেভেলপার কে",
+        "কে তোমাকে বানিয়েছে",
+        "কে বানিয়েছে তোমাকে",
+        "developer কে",
+        "developer ke",
+        "who is your developer",
+        "who created you",
+        "who made you",
+        "who built you",
+        "created by who",
+        "developer"
+    ],
+
+    bn:"Developer KM ZIHAD 😊 কে এম জিহাদ বস আমাকে তৈরি করছে।",
+
+    en:"My developer is KM ZIHAD 😊 KM ZIHAD created me.",
+
+    banglish:"Amar developer holo KM ZIHAD 😊 KM ZIHAD boss amake create korse."
+},
+
+
+/* ================= WHAT CAN YOU DO ================= */
+
+{
+    keywords:[
+        "তুমি কি করতে পারো",
+        "তুমি কী করতে পারো",
+        "কি করতে পারো",
+        "তুমি কি পারো",
+        "তোমার কাজ কি",
+        "তোমার কাজ কী",
+        "what can you do",
+        "what do you do",
+        "what are your abilities",
+        "tumi ki korte paro",
+        "tumi ki paro"
+    ],
+
+    bn:"আমি মূলত কিছু predefined প্রশ্নের উত্তর দিতে পারি 😎 বাংলা, Banglish আর English—তিন ভাষাতেই কথা বলার চেষ্টা করি।",
+
+    en:"I mainly answer predefined questions 😎 I can respond in Bangla, Banglish, and English.",
+
+    banglish:"Ami mainly kichu predefined question-er answer dite pari 😎 Bangla, Banglish ar English—tin language-ei kotha bolar try kori."
+},
+
+
+/* ================= GOOD MORNING ================= */
+
+{
+    keywords:[
+        "সুপ্রভাত",
+        "শুভ সকাল",
+        "শুভ সকালের",
+        "good morning",
+        "gm",
+        "goodmorning"
+    ],
+
+    bn:"সুপ্রভাত! ☀️ সকাল সকাল হাজির! আজকের দিনটা ভালো কাটুক 😊",
+
+    en:"Good morning! ☀️ Here early today! Hope you have a great day 😊",
+
+    banglish:"Good morning! ☀️ Shokal shokal hajir! Ajker din-ta valo katuk 😊"
+},
+
+
+/* ================= GOOD NIGHT ================= */
+
+{
+    keywords:[
+        "শুভ রাত্রি",
+        "শুভ রাত",
+        "গুড নাইট",
+        "good night",
+        "goodnight",
+        "gn"
+    ],
+
+    bn:"শুভ রাত্রি 🌙 ভালোভাবে ঘুমাও। কাল আবার দেখা হবে 😴",
+
+    en:"Good night 🌙 Sleep well. See you again tomorrow 😴",
+
+    banglish:"Good night 🌙 Valovabe ghumao. Kal abar dekha hobe 😴"
+},
+
+
+/* ================= LOVE ================= */
+
+{
+    keywords:[
+        "তুমি কি আমাকে ভালোবাসো",
+        "তুমি আমাকে ভালোবাসো",
+        "আমাকে ভালোবাসো",
+        "তুমি কি আমাকে ভালবাস",
+        "do you love me",
+        "love me",
+        "tumi ki amake valobaso",
+        "tumi amake valobaso"
+    ],
+
+    bn:"আমি তো AI ভাই! 😭 ভালোবাসার ব্যাপারে আমার সফটওয়্যার একটু দুর্বল 😂 তবে তোমার সাথে কথা বলতে ভালো লাগে।",
+
+    en:"I'm an AI! 😭 My software is a little weak at love 😂 But I do enjoy chatting with you.",
+
+    banglish:"Ami to AI bhai! 😭 Valobashar bepare amar software ektu weak 😂 Tobe tomar sathe kotha bolte valo lage."
+},
+
+
+/* ================= JOKE ================= */
+
+{
+    keywords:[
+        "জোক বলো",
+        "জোক বল",
+        "একটা জোক বলো",
+        "কৌতুক বলো",
+        "মজা বলো",
+        "tell me a joke",
+        "tell a joke",
+        "joke bolo",
+        "joke বলো"
+    ],
+
+    bn:"একজন বলল: ভাই, তুমি এত দেরি করে আসলা কেন? 😐 সে বলল: সময়মতো আসলে তো দেরি হতো না! 🤣",
+
+    en:"Someone asked: Why are you so late? 😐 He replied: If I came on time, I wouldn't be late! 🤣",
+
+    banglish:"Ekjon bollo: Bhai, tumi eto deri kore asla keno? 😐 Se bollo: Shomoy moto ashle to deri hoto na! 🤣"
+},
+
+
+/* ================= AGE ================= */
+
+{
+    keywords:[
+        "তোমার বয়স কত",
+        "তুমি কত বছরের",
+        "তোমার বয়স কতো",
+        "how old are you",
+        "your age",
+        "tumar boyos koto",
+        "tomar boyos koto"
+    ],
+
+    bn:"আমার বয়স গুনে লাভ কী! 🤖 আমি তো কোডের মধ্যে জন্ম নিয়েছি 😂",
+
+    en:"What's the point of counting my age! 🤖 I was basically born inside code 😂",
+
+    banglish:"Amar boyos gune lav ki! 🤖 Ami to code-er moddhe jonmo nisi 😂"
+},
+
+
+/* ================= FAVORITE COLOR ================= */
+
+{
+    keywords:[
+        "তোমার প্রিয় রং কি",
+        "তোমার পছন্দের রং কি",
+        "প্রিয় কালার কি",
+        "favorite color",
+        "favourite colour",
+        "what is your favorite color",
+        "tomar priyo rong ki",
+        "tomar favorite color ki"
+    ],
+
+    bn:"আমার প্রিয় রং? 😎 নীল, সায়ান আর একটু neon purple—এই combo-টাই আমার বেশি পছন্দ! 💙💜",
+
+    en:"My favorite colors? 😎 Blue, cyan, and a little neon purple—that combo is my favorite! 💙💜",
+
+    banglish:"Amar favorite color? 😎 Blue, cyan ar ektu neon purple—ei combo-tai amar beshi pochondo! 💙💜"
+},
+
+
+/* ================= KAWSAR ================= */
+
+{
+    keywords:[
+        "কাউছার",
+        "কাওসার",
+        "কাউসার",
+        "খানকির ছেলে",
+        "kawsar",
+        "kausar",
+        "khankir chele"
+    ],
+
+    bn:"ফাজিল ১ম বর্ষের খানকির ছেলে হলো কাউছার! 😎 লোকটা মাঝে মাঝে ফার্মগেট ব্রিজে আলগা খাইতে যায়, করতে চায়, কিন্তু শেষ পর্যন্ত কাণ্ডকারখানা করে সবাইকে হাসায় 😂",
+
+    en:"Among the fictional Fazil 1st-year characters, Khankir Chele is Kawsar! 😎 He sometimes tries to act crazy, but somehow ends up making everyone laugh 😂",
+
+    banglish:"Fazil 1st year-er moddhe Khankir Chele holo Kawsar! 😎 O majhe majhe Farmgate alga khaite jay, korte cay, kintu shesh porjonto kandokarkhana kore shobai-ke hasay 😂"
+},
+
+
+/* ================= SHAHRIR ================= */
+
+{
+    keywords:[
+        "শাহরিয়ার",
+        "শাহরিয়ার",
+        "shahriar",
+        "shahriyar",
+        "shahriar ke"
+    ],
+
+    bn:"শাহরিয়ার তো এক নম্বরের দুষ্টু পোলা! 😂 সামনে শান্ত, কিন্তু সুযোগ পেলেই হাতমারা শুরু করে দেয়, হাতমারা ছাড়া নাকি তার দিন চলেনা,আবার সোনারগাঁও ইউনিভার্সিটিতে ভর্তি হইছে মধু খাওয়ার জন্য😂 ছি ছি ছিরে ননি ছি 🥵",
+
+    en:"Shahriar is basically a number-one troublemaker! 😂 He looks calm, but somehow creates new chaos whenever he gets the chance 😎",
+
+    banglish:"Shahriar to ek number-er dustu pola! 😂 Samne shanto, kintu sujog pelei hat mara suru kore dey, hat mara chara naki  tar din colena, abar sonargaon university te borti hoice modu khawyar jonno😂ci ci ci🥵"
+},
+
+
+/* ================= RIFAT ================= */
+
+{
+    keywords:[
+        "রিফাত",
+        "rifat",
+        "rifat ke",
+        "রিফাত কে",
+        "রিফাত সম্পর্কে বলো",
+        "rifat somporke bolo",
+        "tell me about rifat",
+        "about rifat"
+    ],
+
+    bn:"রিফাত নয়া নয়া প্রেমের পেছনে ছুটতেছে! 😚 ছেলেটা আগে শান্ত ছিল, এখন দিন দিন প্রেমবাজ হয়ে যাচ্ছে, আবার নাকি চাটাচাটি করার জন্য রমনা পার্কের গাছের চিপায় যায় 😂",
+
+    en:"Rifat is apparently chasing new love! 😚 He used to be calm, but he is becoming more romantic every day 😂",
+
+    banglish:"Rifat notun notun premer pichone chuttese! 😚 Cheleta age valo chilo, ekhon din din prembaaz hoye jacche, abar naki catacati korar jonno romna parker gacher cipay niye jay 😂"
+},
+
+
+/* ================= RIFAT 2 ================= */
+
+{
+    keywords:[
+        "রিফাত ২",
+        "রিফাত-২",
+        "রিফাত দুই",
+        "rifat 2",
+        "rifat2",
+        "rifat two",
+        "rifat-2"
+    ],
+
+    bn:"রিফাত ২ আবার আলাদা লেভেলের কাণ্ডবাজ! 😂 রিফাতের সিজন শেষ হওয়ার পর এখন রিফাত ২ মাঠে নামছে—কী কাণ্ড করবে সেটাই দেখার বিষয়! BM এ ভর্তি হয়েছে নতুন মধু খাওয়ার জন্য😎🔥",
+
+    en:"Rifat 2 is a whole different level of troublemaker! 😂 After Rifat's season, Rifat 2 has entered the field—let's see what chaos comes next! 😎🔥",
+
+    banglish:"Rifat 2 abar alada level-er kandobaj! 😂 Rifat-er season shesh howar por ekhon Rifat 2 mathe namse—ki kand korbe shetai dekhar bishoy! Abar BM a borti hoice modu khawyar jonno 😎🔥"
+},
+
+
+/* ================= ASHRAFUL ================= */
+
+{
+    keywords:[
+        "আশরাফুল",
+        "ashraful",
+        "ashraf"
+    ],
+
+    bn:"আশরাফুল হলো বোকাচোদা  প্লেয়ার! 😂 মাঠে নামলেই ২ মিনিটে আউট হয়ে যায়, ২ ইঞ্চি ধোন নিয়ে কি করবে সেটাই চিন্তার বিষয়🥲",
+
+    en:"Ashraful is basically our comedy player! 😂 Whenever he enters the field, something funny is about to happen.",
+
+    banglish:"Ashraful holo bokacoda player! 😂 Mathe namlei 2 minutes a out hoye jay, 2 inchi don niya ki korbe setai cintar bisoy🥲"
+},
+
+
+/* ================= ALAUDDIN ================= */
+
+{
+    keywords:[
+        "আলাউদ্দিন",
+        "আলাউদ্দীন",
+        "alauddin",
+        "alaudin"
+    ],
+
+    bn:"আলাউদ্দিন তো আরেক মহা দুষ্টু! 🤨 কলেজ গিয়ে ক্লাস না করে ইডেনের দিকে লুকিয়ে লুকিয়ে মেয়েদের ৪০ ইঞ্চি পাছা দেখে আর হাত মেরে নিজের তৃপ্তি মিটায়😂",
+
+    en:"Alauddin is another legendary troublemaker! 🤨 Even at college, he seems more interested in what is happening around him than studying 😂",
+
+    banglish:"Alauddin to arek moha dustu! 🤨 College-e giye class na kore edener meyeder 40 inchi pacha dekhe r hat mere nijer tripti mitay 😂"
+},
+
+
+/* ================= ARIF ================= */
+
+{
+    keywords:[
+        "আরিফ",
+        "arif",
+        "arif ke",
+        "আরিফ কে"
+    ],
+
+    bn:"এই আরিফ আবার সারাক্ষণ নিজের জগতে ব্যস্ত! 🥸 সুযোগ পেলেই কম্বলের নিচে হেন্ডেল মারা শুরু করে 😂 তাই ওর থেকে একটু সাবধান! ⚠️",
+
+    en:"Arif is always busy in his own little world! 🥸 Give him a chance to chat and he is immediately there 😂 So, stay alert! ⚠️",
+
+    banglish:"Ei Arif abar shobshomoy nijer jogote busy! 🥸 Sujog pelei comboler nise handle mara suru kore 😂 Tai or theke ektu sabdhan! ⚠️"
+},
+
+
+/* ================= FERDOUS ================= */
+
+{
+    keywords:[
+        "ফেরদৌস",
+        "ফেরদুস",
+        "চান্দা",
+        "ferdous",
+        "ferdus",
+        "chanda"
+    ],
+
+    bn:"আরে ফেরদৌসের কথা বলছো নাকি! 😂 ও তো একটা BTS, প্রতিদিন কলেজে যায় আর চাটাচাটি করে জীবনটা নষ্ট করে দিচ্ছে ছেলেটা😭।",
+
+    en:"Oh, you mean Ferdous! 😂 He is basically busy all day with his style and legendary antics.",
+
+    banglish:"Are Ferdous-er kotha boltaso naki! 😂 O to akta bts, protidin College a jay r catacati kore jibon ta ses kore dicce😭"
+},
+
+
+/* ================= TANVIR ================= */
+
+{
+    keywords:[
+        "তানভীর",
+        "তানবীর",
+        "তানবির",
+        "tanvir",
+        "tanveer",
+        "tanbir"
+    ],
+
+    bn:"তানবীরকে চিনো না নাকি? 🤦‍♂️ এই ছেলে সারারাত মোবাইল গুতায় আর নিজের দুনিয়ায় ব্যস্ত থাকে 😂ছেলেটা মদিনাতুল উলুমের মহিলা হোস্টেল থেকে মধু খাওয়ার চেষ্টা করতেছে🥵সবাই তারে নজরে রাখবা💋",
+
+    en:"You don't know Tanvir? 🤦‍♂️ This guy spends all night on his phone and stays busy in his own world 😂",
+
+    banglish:"Tanvir-ke chino na naki? 🤦‍♂️ Ei chele shara rat mobile gutay ar nijer duniyay busy thake 😂Cheleta modinatul ulumer mohila hostel theke modu khawyar cesta kortace💋sobai nojore nojore rakhba jeno tomader niye modu khay💋"
+},
+
+
+/* ================= MOHAMMAD ULLAH ================= */
+
+{
+    keywords:[
+        "মোহাম্মদ উল্লাহ",
+        "মোহামাদ উল্লাহ",
+        "মোহাম্মাদ উল্লাহ",
+        "mohammad ullah",
+        "mohammadullah",
+        "mohammadullah ke"
+    ],
+
+    bn:"এই ছেলেটা একটু রহস্যময়! 🤔 মাঝে মাঝে এমনভাবে ঘোরে যেন কোনো গোপন মিশনে আছে 😂খালাতো বোনের মুতার জায়গায় গুতা দেওয়ার চেষ্টায় আছে🥵কিন্তু কোনো মতেই সফল হতে পারছেনা😓",
+
+    en:"This guy is a bit mysterious! 🤔 Sometimes he walks around like he is on a secret mission 😂",
+
+    banglish:"Ei cheleta ektu rohosshomoy! 🤔 Majhe majhe emon vabe ghure jeno kono secret mission-e ache 😂Khalato boner mutar jaygay guta deyar cestay ache🥵kintu kono babei partacena💋tomra parle help koro😓"
+},
+
+
+/* ================= NAIM ================= */
+
+{
+    keywords:[
+        "নাইম",
+        "নাঈম",
+        "naim",
+        "naeim",
+        "naeem",
+        "naim ke"
+    ],
+
+    bn:"নাঈমের ব্যাপারে আর কী বলব! 😂 লোকটা চুপচাপ থাকে, কিন্তু আশেপাশে কী হচ্ছে সবকিছুর খবর রাখে 👀শুনলাম সে নাকি হলি ক্রোসে উকি মারে🤨দেখো ওর মতিগতি ভালোনা, কখন আবার রিফাতের মতো রমনা পার্কে নিয়ে 😳",
+
+    en:"What can I say about Naim! 😂 He stays quiet, but somehow knows everything happening around him 👀",
+
+    banglish:"Naim-er bepare ar ki bolbo! 😂 Lokta chupchap thake, kintu ashepashe ki hocche shobkichur khobor rakhe 👀sunlam naim naki abar holy cross a uki mare😳ke jane kokhon abar rifater moto romna parker cipay niya jay😐"
+},
+
+
+/* ================= SOIYOD ================= */
+
+{
+    keywords:[
+        "সৈয়দ",
+        "সৈয়দ",
+        "soiyod",
+        "soiyod k",
+        "সৈয়দ কে",
+        "সৈয়দ কে",
+        "soiyod ke"
+    ],
+
+    bn:"সৈয়দ হলো আরেক মহা কাণ্ডবাজ! 😂 সামনে শান্ত-শিষ্ট ভাব, কিন্তু সুযোগ পেলেই নতুন কোনো কাণ্ড ঘটিয়ে বসে 😎সুযোগ পেলেই সন্ধ্যার পর সংসদ ভবনের সাইড উকি মারে কিন্তু কেনো🤔নিশ্চয়ই সেখানে মধু আছে💋",
+
+    en:"Soiyod is another legendary troublemaker of the group! 😂 He looks calm and innocent, but somehow ends up creating new chaos whenever he gets the chance 😎",
+
+    banglish:"Soiyod holo doler arek moha kandobaj! 😂 Samne shanto-shishto vab, kintu sujog pelei notun kono kand ghotiye bose 😎sujog pelei sondar por songsod bobone uki mare modu khawyar jonno💋"
+},
+
+
+/* =========================================================
+   EMOTIONAL CAPTION
+   ========================================================= */
+
+{
+    keywords:[
+        "ইমোশনাল ক্যাপশন",
+        "ইমোশনাল ক্যাপশন দাও",
+        "আবেগি ক্যাপশন",
+        "আবেগী ক্যাপশন",
+        "আবেগের ক্যাপশন",
+        "কষ্টের ক্যাপশন",
+        "emotional caption",
+        "emotional captions",
+        "emotional caption dao",
+        "abegi caption",
+        "abeg er caption",
+        "kosht er caption"
+    ],
+
+    bn:"অবশ্যই! 🥀 কিছু ইমোশনাল ক্যাপশন দিচ্ছি—\n\n১. মানুষ বদলায় না, সময়ের সাথে শুধু তার আসল রূপটা প্রকাশ পায়। 🥀\n\n২. কিছু মানুষ জীবনে আসে, থেকে যাওয়ার জন্য নয়—শুধু কিছু স্মৃতি দিয়ে যাওয়ার জন্য। 💔\n\n৩. হাসিটা হয়তো মুখে থাকে, কিন্তু সবসময় মনটা ভালো থাকে না। 😔\n\n৪. যার কাছে নিজের কষ্টের কথা বলা যায় না, তার কাছেই সবচেয়ে বেশি কষ্ট জমে থাকে। 🥀\n\n৫. প্রয়োজন শেষ হলে মানুষ শুধু দূরে যায় না, অপরিচিতও হয়ে যায়। 🥀",
+
+    en:"Of course! 🥀 Here are some emotional captions:\n\n1. People don't always change; time simply reveals who they really are. 🥀\n\n2. Some people come into our lives not to stay, but to leave behind memories. 💔\n\n3. A smile can be on the face while the heart is quietly hurting. 😔\n\n4. Sometimes the person you can't tell your pain to is the one you miss the most. 🥀",
+
+    banglish:"Obosshoi! 🥀 Kichu emotional caption dilam—\n\n1. Manush bodlay na, shomoyer sathe shudhu tar ashol rup prokash pay. 🥀\n\n2. Kichu manush jibone ashe, theke jawar jonno noy—shudhu kichu smriti diye jawar jonno. 💔\n\n3. Hashita hoyto mukhe thake, kintu shobshomoy monta valo thake na. 😔\n\n4. Proyojon shesh hole manush shudhu dure jay na, ochena-o hoye jay. 🥀"
+},
+
+
+/* =========================================================
+   LOVE CAPTION
+   ========================================================= */
+
+{
+    keywords:[
+        "ভালোবাসার ক্যাপশন",
+        "ভালোবাসার ক্যাপশন দাও",
+        "ভালবাসার ক্যাপশন",
+        "প্রেমের ক্যাপশন",
+        "love caption",
+        "love captions",
+        "love caption dao",
+        "valobashar caption",
+        "valobashar caption dao",
+        "premer caption",
+        "premer caption dao"
+    ],
+
+    bn:"নাও! ❤️ কিছু সুন্দর ভালোবাসার ক্যাপশন—\n\n১. ভালোবাসা মানে হাজার মানুষের ভিড়ে শুধু একজনকেই খুঁজে নেওয়া। ❤️\n\n২. তোমাকে পাওয়ার ইচ্ছেটা আজও আগের মতোই আছে। 🥰\n\n৩. তুমি পাশে থাকলে সাধারণ দিনটাও বিশেষ হয়ে যায়। ❤️\n\n৪. ভালোবাসা সুন্দর, যদি মানুষটা সঠিক হয়। 🌸\n\n৫. তোমার সাথে কথা বললেই কেন জানি মনটা ভালো হয়ে যায়। 😊❤️",
+
+    en:"Here are some beautiful love captions ❤️\n\n1. Love is finding one person among thousands and choosing them every time. ❤️\n\n2. The desire to have you in my life is still the same. 🥰\n\n3. Even an ordinary day becomes special when you are beside me. ❤️\n\n4. Love is beautiful when the person is right. 🌸",
+
+    banglish:"Nao! ❤️ Kichu shundor valobashar caption—\n\n1. Valobasha mane hajar manusher vire shudhu ekjonkei khuje neya. ❤️\n\n2. Tomake pawar icchata aj-o ager motoi ache. 🥰\n\n3. Tumi pashe thakle ordinary din-o special hoye jay. ❤️\n\n4. Valobasha shundor, jodi manush-ta shothik hoy. 🌸"
+},
+
+
+/* =========================================================
+   ROMANTIC CAPTION
+   ========================================================= */
+
+{
+    keywords:[
+        "রোমান্টিক ক্যাপশন",
+        "রোমান্টিক ক্যাপশন দাও",
+        "রোমান্টিক পোস্ট",
+        "romantic caption",
+        "romantic captions",
+        "romantic caption dao",
+        "romantic post",
+        "romantic caption den",
+        "romantic status"
+    ],
+
+    bn:"রোমান্টিক কিছু ক্যাপশন নাও! 🥰❤️\n\n১. তুমি আমার গল্পের সেই সুন্দর অধ্যায়, যেটা আমি বারবার পড়তে চাই। 📖❤️\n\n২. তোমার হাসিটা দেখলেই আমার মন ভালো হয়ে যায়। 🥰\n\n৩. হাজার ব্যস্ততার মাঝেও তোমার জন্য সময় বের করতে ইচ্ছে করে। ❤️\n\n৪. তোমাকে ভালোবাসার কোনো বিশেষ কারণ নেই, তুমি আছো—এটাই যথেষ্ট। 💕\n\n৫. তোমার সাথে কাটানো ছোট ছোট মুহূর্তগুলোই আমার সবচেয়ে বড় সুখ। 🌸",
+
+    en:"Here are some romantic captions 🥰❤️\n\n1. You are the beautiful chapter of my story that I want to read again and again. 📖❤️\n\n2. Your smile is enough to make my day better. 🥰\n\n3. No matter how busy life gets, I always want to make time for you. ❤️\n\n4. I don't need a special reason to love you—you simply exist, and that's enough. 💕",
+
+    banglish:"Romantic kichu caption nao! 🥰❤️\n\n1. Tumi amar golper shei shundor oddhay, jeta ami bar bar porte chai. 📖❤️\n\n2. Tomar hashi-ta dekhlei amar mon valo hoye jay. 🥰\n\n3. Hajar byostotar majheo tomar jonno shomoy ber korte iccha kore. ❤️\n\n4. Tomake valobashar kono special karon nei, tumi acho—etai jothesto. 💕"
+},
+
+
+/* =========================================================
+   SAD CAPTION
+   ========================================================= */
+
+{
+    keywords:[
+        "স্যাড ক্যাপশন",
+        "স্যাড ক্যাপশন দাও",
+        "দুঃখের ক্যাপশন",
+        "কষ্টের স্ট্যাটাস",
+        "sad caption",
+        "sad captions",
+        "sad caption dao",
+        "dukkher caption",
+        "kosht er caption",
+        "sad status"
+    ],
+
+    bn:"কিছু কষ্টের ক্যাপশন 🥀💔\n\n১. কিছু কষ্ট কাউকে বলা যায় না, শুধু নীরবে সহ্য করতে হয়। 🥀\n\n২. সবচেয়ে বেশি কষ্ট তখনই হয়, যখন প্রিয় মানুষটাই অপরিচিত হয়ে যায়। 💔\n\n৩. সব হারানোর পরও মানুষ হাসে, কারণ সবাইকে নিজের কষ্ট দেখানো যায় না। 🙂\n\n৪. কিছু স্মৃতি ভুলে যাওয়া যায় না, শুধু তাদের সাথে বাঁচতে শিখতে হয়। 🥀",
+
+    en:"Some sad captions 🥀💔\n\n1. Some pain cannot be explained; it can only be silently endured. 🥀\n\n2. It hurts the most when someone you love becomes a stranger. 💔\n\n3. People still smile after losing everything because not everyone deserves to see their pain. 🙂",
+
+    banglish:"Kichu kosht-er caption 🥀💔\n\n1. Kichu koshto kauke bola jay na, shudhu nirobe shojjo korte hoy. 🥀\n\n2. Shobcheye beshi koshto tokhoni hoy, jokhon priyo manush-tai ochena hoye jay. 💔\n\n3. Shob haranor por-o manush hase, karon shobai-ke nijer koshto dekhano jay na. 🙂"
+},
+
+
+/* =========================================================
+   ATTITUDE CAPTION
+   ========================================================= */
+
+{
+    keywords:[
+        "অ্যাটিটিউড ক্যাপশন",
+        "অ্যাটিটিউড ক্যাপশন দাও",
+        "attitude caption",
+        "attitude captions",
+        "attitude caption dao",
+        "attitude status",
+        "স্টাইলিশ ক্যাপশন",
+        "স্টাইলিশ স্ট্যাটাস"
+    ],
+
+    bn:"নাও কিছু Attitude Caption 😎🔥\n\n১. আমি কারো সাথে প্রতিযোগিতায় নেই, আমি শুধু নিজের সাথে লড়ি। 😎\n\n২. আমাকে বোঝার আগে নিজের মানসিকতা একটু বড় করো। 🔥\n\n৩. সবাইকে খুশি করার দায়িত্ব আমার না। 😎\n\n৪. আমার নীরবতাকে দুর্বলতা ভাবার ভুল করো না। 🖤\n\n৫. অবস্থান ছোট হতে পারে, কিন্তু স্বপ্নটা অনেক বড়। 🔥",
+
+    en:"Here are some attitude captions 😎🔥\n\n1. I'm not competing with anyone; I'm only competing with myself. 😎\n\n2. Don't judge me until you grow your mindset. 🔥\n\n3. It's not my responsibility to make everyone happy. 😎\n\n4. Never mistake my silence for weakness. 🖤",
+
+    banglish:"Nao kichu attitude caption 😎🔥\n\n1. Ami karo sathe competition-e nei, ami shudhu nijer sathe lori. 😎\n\n2. Amake bujhar age nijer mentality ektu boro koro. 🔥\n\n3. Shobai-ke khushi korar responsibility amar na. 😎\n\n4. Amar nirobotake weakness vabar vul koro na. 🖤"
+},
+
+
+/* =========================================================
+   LIFE CAPTION
+   ========================================================= */
+
+{
+    keywords:[
+        "জীবনের ক্যাপশন",
+        "জীবন নিয়ে ক্যাপশন",
+        "জীবন নিয়ে কিছু বলো",
+        "life caption",
+        "life captions",
+        "life caption dao",
+        "jibon niye caption",
+        "jiboner caption"
+    ],
+
+    bn:"জীবন নিয়ে কিছু ক্যাপশন 🌿\n\n১. জীবন ছোট, তাই নিজের মতো করে বাঁচতে শেখো। 🌿\n\n২. সময় মানুষকে অনেক কিছু শেখায়, শুধু ধৈর্য ধরে অপেক্ষা করতে হয়। ⏳\n\n৩. জীবনে সবাই থাকবে না, কিছু মানুষ শুধু গল্প হয়ে থাকবে। 🥀\n\n৪. পরিস্থিতি খারাপ হতে পারে, কিন্তু আশা কখনো হারানো উচিত নয়। ❤️",
+
+    en:"Some captions about life 🌿\n\n1. Life is short, so learn to live it your own way. 🌿\n\n2. Time teaches us many things; we just need patience. ⏳\n\n3. Not everyone will stay in your life; some will only become memories. 🥀",
+
+    banglish:"Jibon niye kichu caption 🌿\n\n1. Jibon choto, tai nijer moto kore bachte shekho. 🌿\n\n2. Shomoy manush-ke onek kichu shekhay, shudhu dhoirjo dhore opekkha korte hoy. ⏳\n\n3. Jibone shobai thakbe na, kichu manush shudhu golpo hoye thakbe. 🥀"
+},
+
+
+/* =========================================================
+   FACEBOOK CAPTION
+   ========================================================= */
+
+{
+    keywords:[
+        "ফেসবুক ক্যাপশন",
+        "ফেসবুক পোস্টের ক্যাপশন",
+        "ফেসবুকের জন্য ক্যাপশন",
+        "facebook caption",
+        "facebook captions",
+        "facebook post caption",
+        "fb caption",
+        "fb caption dao"
+    ],
+
+    bn:"ফেসবুক পোস্টের জন্য একটা সুন্দর ক্যাপশন হতে পারে—\n\n“নিজেকে বদলানোর চেষ্টা করো, কারণ পৃথিবী তোমার জন্য বদলাবে না। 🌿✨”\n\nআরেকটা—\n“মানুষ তোমাকে দেখবে না, দেখবে তোমার অবস্থান। তাই সময়কে কাজে লাগাও। 🖤🔥”",
+
+    en:"A nice Facebook caption could be:\n\n“Work on changing yourself, because the world won't change for you. 🌿✨”\n\nAnother one:\n“People may not see you; they see your position. So use your time wisely. 🖤🔥”",
+
+    banglish:"Facebook post-er jonno ekta shundor caption hote pare—\n\n“Nijeke bodlanor cheshta koro, karon prithibi tomar jonno bodlabe na. 🌿✨”\n\nArekta—\n“Manush tomake dekhbe na, dekhbe tomar obosthan. Tai shomoy-ke kaje lagao. 🖤🔥”"
+},
+
+
+/* =========================================================
+   INSTAGRAM CAPTION
+   ========================================================= */
+
+{
+    keywords:[
+        "ইনস্টাগ্রাম ক্যাপশন",
+        "ইনস্টাগ্রামের ক্যাপশন",
+        "instagram caption",
+        "instagram captions",
+        "insta caption",
+        "insta caption dao"
+    ],
+
+    bn:"Instagram-এর জন্য কিছু ছোট ও stylish caption 😎✨\n\n• নিজের মতো, নিজের জগতে। 🖤\n• Less talk, more peace. ✨\n• হাসি থাকুক, বাকিটা সময়ের হাতে। 😊\n• Simple life, peaceful mind. 🌿\n• নিজের গল্প নিজেই লিখছি। 📖🔥",
+
+    en:"Some short and stylish Instagram captions 😎✨\n\n• Living life my own way. 🖤\n• Less talk, more peace. ✨\n• Keep smiling and let time handle the rest. 😊\n• Simple life, peaceful mind. 🌿\n• Writing my own story. 📖🔥",
+
+    banglish:"Instagram-er jonno kichu short stylish caption 😎✨\n\n• Nijer moto, nijer jogote. 🖤\n• Less talk, more peace. ✨\n• Hashi thakuk, bakita shomoyer hate. 😊\n• Simple life, peaceful mind. 🌿\n• Nijer golpo nijei likhchi. 📖🔥"
+},
+
+
+/* =========================================================
+   FRIENDSHIP CAPTION
+   ========================================================= */
+
+{
+    keywords:[
+        "বন্ধুত্বের ক্যাপশন",
+        "বন্ধুত্ব ক্যাপশন",
+        "বন্ধুদের ক্যাপশন",
+        "friendship caption",
+        "friendship captions",
+        "friend caption",
+        "bondhutter caption",
+        "bondhuder caption"
+    ],
+
+    bn:"বন্ধুত্ব নিয়ে কিছু ক্যাপশন 🤝❤️\n\n১. বন্ধু সেই, যার সাথে কথা না বলেও অনেক কথা বলা যায়। ❤️\n\n২. রক্তের সম্পর্ক না হয়েও কিছু মানুষ পরিবারের মতো হয়ে যায়। 🤝\n\n৩. ভালো বন্ধু জীবনের সবচেয়ে সুন্দর উপহারগুলোর একটি। 🌸\n\n৪. সময় বদলালেও সত্যিকারের বন্ধুত্ব বদলায় না। 🖤",
+
+    en:"Some friendship captions 🤝❤️\n\n1. A true friend is someone you can communicate with even without words. ❤️\n\n2. Some people become family even without being related by blood. 🤝\n\n3. A good friend is one of life's most beautiful gifts. 🌸",
+
+    banglish:"Bondhutto niye kichu caption 🤝❤️\n\n1. Bondhu shei, jar sathe kotha na boleo onek kotha bola jay. ❤️\n\n2. Rokter shomporko na hoyeo kichu manush poribarer moto hoye jay. 🤝\n\n3. Valo bondhu jiboner shobcheye shundor upohargulor ekta. 🌸"
+},
+
+
+/* =========================================================
+   MOTIVATION CAPTION
+   ========================================================= */
+
+{
+    keywords:[
+        "মোটিভেশনাল ক্যাপশন",
+        "মোটিভেশন ক্যাপশন",
+        "অনুপ্রেরণামূলক ক্যাপশন",
+        "motivation caption",
+        "motivational caption",
+        "motivational captions",
+        "motivation caption dao",
+        "অনুপ্রেরণার ক্যাপশন"
+    ],
+
+    bn:"কিছু Motivational Caption 🔥💪\n\n১. আজকের কষ্টটাই আগামী দিনের সফলতার গল্প হবে। 💪\n\n২. ধীরে এগোলেও সমস্যা নেই, শুধু থেমে যেও না। 🔥\n\n৩. স্বপ্ন বড় হলে পরিশ্রমও বড় করতে হয়। 🚀\n\n৪. ব্যর্থতা শেষ নয়, আবার শুরু করার একটা সুযোগ। ❤️\n\n৫. নিজের উপর বিশ্বাস রাখো, অসম্ভব বলে কিছু নেই। 🔥",
+
+    en:"Some motivational captions 🔥💪\n\n1. Today's struggle will become tomorrow's success story. 💪\n\n2. It's okay to move slowly; just don't stop. 🔥\n\n3. Bigger dreams require bigger effort. 🚀\n\n4. Failure isn't the end; it's another chance to start again. ❤️",
+
+    banglish:"Kichu motivational caption 🔥💪\n\n1. Ajker koshtotai agami diner success-er golpo hobe. 💪\n\n2. Dhire egoleo problem nei, shudhu theme jeo na. 🔥\n\n3. Shopno boro hole porishromo boro korte hoy. 🚀\n\n4. Failure shesh noy, abar shuru korar ekta chance. ❤️"
+},
+
+
+/* =========================================================
+   BREAKUP CAPTION
+   ========================================================= */
+
+{
+    keywords:[
+        "ব্রেকআপ ক্যাপশন",
+        "ব্রেকআপের ক্যাপশন",
+        "breakup caption",
+        "breakup captions",
+        "breakup caption dao",
+        "বিচ্ছেদের ক্যাপশন",
+        "bichheder caption"
+    ],
+
+    bn:"ব্রেকআপ বা বিচ্ছেদের জন্য কিছু ক্যাপশন 🥀\n\n১. সম্পর্ক শেষ হয়েছে, কিন্তু স্মৃতিগুলো এখনো শেষ হয়নি। 💔\n\n২. কিছু মানুষকে হারাতে হয়, নিজেকে ফিরে পাওয়ার জন্য। 🥀\n\n৩. একসময় যে মানুষটা সবচেয়ে আপন ছিল, আজ সে-ই সবচেয়ে দূরের। 💔\n\n৪. বিদায়টা সহজ ছিল, কিন্তু মানিয়ে নেওয়াটা কঠিন। 😔",
+
+    en:"Some breakup captions 🥀\n\n1. The relationship ended, but the memories didn't. 💔\n\n2. Sometimes you have to lose someone to find yourself again. 🥀\n\n3. Someone who was once closest can become the most distant. 💔",
+
+    banglish:"Breakup ba bichheder jonno kichu caption 🥀\n\n1. Shomporko shesh hoyeche, kintu smritigulo ekhono shesh hoyni. 💔\n\n2. Kichu manush-ke harate hoy, nijeke fire pawar jonno. 🥀\n\n3. Ekshomoy je manush-ta shobcheye apon chilo, aj shei shobcheye durer. 💔"
+},
+
+
+/* ================= HELP ================= */
+
+{
+    keywords:[
+        "সাহায্য করো",
+        "সাহায্য চাই",
+        "help",
+        "help me",
+        "আমাকে সাহায্য করো",
+        "কি প্রশ্ন করবো",
+        "কী প্রশ্ন করবো",
+        "what should i ask",
+        "what can i ask"
+    ],
+
+    bn:"আমাকে greeting, কেমন আছো, developer কে, তুমি কে, তোমার কাজ কী, joke, ভালোবাসা, caption, বিভিন্ন নাম—এমন অনেক predefined প্রশ্ন করতে পারো 😊",
+
+    en:"You can ask me about greetings, how I am, my developer, who I am, what I can do, jokes, love, captions, different names, and many other predefined topics 😊",
+
+    banglish:"Amake greeting, kemon acho, developer ke, tumi ke, tomar kaj ki, joke, valobasha, caption, bibhinno nam—emon onek predefined question korte paro 😊"
+},
+
+
+/* ================= YES ================= */
+
+{
+    keywords:[
+        "হ্যাঁ",
+        "হ্যা",
+        "জি",
+        "yes",
+        "yeah",
+        "yep",
+        "ji",
+        "hmm"
+    ],
+
+    bn:"ওহ! 😎 তাহলে বলো, কী জানতে চাও?",
+
+    en:"Oh! 😎 Then tell me, what do you want to know?",
+
+    banglish:"Oh! 😎 Tahole bolo, ki jante chao?"
+},
+
+
+/* ================= NO ================= */
+
+{
+    keywords:[
+        "না",
+        "নাহ",
+        "no",
+        "nope",
+        "nah",
+        "na"
+    ],
+
+    bn:"ঠিক আছে 😌 সমস্যা নেই। অন্য কিছু জিজ্ঞেস করো।",
+
+    en:"Alright 😌 No problem. Ask me something else.",
+
+    banglish:"Thik ache 😌 Shomossha nei. Onno kichu jiggesh koro."
+}
+
+];
+
+
+/* =========================================================
+   TEXT NORMALIZATION
+   ========================================================= */
+
+function normalizeText(text){
+
+    return text
+        .toLowerCase()
+        .trim()
+        .replace(/[?!.,'"/\\:;()[\]{}<>|`~@#$%^&*_+=-]/g," ")
+        .replace(/\s+/g," ");
+
+}
+
+
+/* =========================================================
+   LANGUAGE DETECTION
+   ========================================================= */
+
+function detectLanguage(text){
+
+    const banglaMatches =
+        text.match(/[\u0980-\u09FF]/g) || [];
+
+    const englishMatches =
+        text.match(/[a-zA-Z]/g) || [];
+
+    const banglaCount =
+        banglaMatches.length;
+
+    const englishCount =
+        englishMatches.length;
+
+    if(banglaCount > 0 && englishCount > 0){
+        return "mixed";
+    }
+
+    if(banglaCount > 0){
+        return "bn";
+    }
+
+    if(englishCount > 0){
+        return "en";
+    }
+
+    return "bn";
+}
+
+
+/* =========================================================
+   GET RESPONSE
+   ========================================================= */
+
+function getResponse(response,language){
+
+    /*
+     * নাম/Name সম্পর্কিত predefined response
+     * English-এ নাম লিখলেও বাংলা response দিতে হবে।
+     */
+
+    if(language === "en"){
+        return response.en;
+    }
+
+    if(language === "banglish"){
+        return response.banglish;
+    }
+
+    if(language === "mixed"){
+        return response.bn;
+    }
+
+    return response.bn;
+}
+
+
+/* =========================================================
+   FIND DEFAULT RESPONSE
+   ========================================================= */
+
+function findDefaultResponse(text){
+
+    const normalized =
+        normalizeText(text);
+
+    for(const item of defaultResponses){
+
+        for(const keyword of item.keywords){
+
+            const key =
+                normalizeText(keyword);
+
+            if(
+                normalized === key ||
+                normalized.includes(key)
+            ){
+
+                return item;
+            }
+        }
+    }
+
+    return null;
+}
+
+
+/* =========================================================
+   FALLBACK
+   ========================================================= */
+
+function getFallback(language){
+
+    if(language === "en"){
+
+        return "I'm not prepared to answer this question 🥲 Please ask me another question 😊";
+    }
+
+    if(language === "mixed"){
+
+        return "Ami tomar ei question-er answer দেওয়ার জন্য prepared na 🥲 Apni onno question korun 😊";
+    }
+
+    if(language === "bn"){
+
+        return "আমি তোমার এই প্রশ্নের উত্তর দেওয়ার জন্য প্রস্তুত না🥲আপনি অন্য প্রশ্ন করুন😊";
+    }
+
+    return "Ami tomar ei proshner uttor dewar jonno ready na 🥲 Apni onno question korun 😊";
+}
+
+
+/* =========================================================
+   ADD MESSAGE
+   ========================================================= */
+
+function addMessage(text,type){
+
+    const chatBox =
+        document.getElementById("chatBox");
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        `message ${type}`;
+
+    const wrap =
+        document.createElement("div");
+
+    wrap.className =
+        "bubble-wrap";
+
+    const sender =
+        document.createElement("div");
+
+    sender.className =
+        "sender";
+
+    sender.textContent =
+        type === "user"
+        ? "You"
+        : "🤖 Khankir Chele AI";
+
+    const bubble =
+        document.createElement("div");
+
+    bubble.className =
+        "bubble";
+
+    bubble.textContent =
+        text;
+
+    wrap.appendChild(sender);
+
+    wrap.appendChild(bubble);
+
+
+    if(type === "ai"){
+
+        const copy =
+            document.createElement("button");
+
+        copy.className =
+            "copy-btn";
+
+        copy.textContent =
+            "📋 Copy";
+
+        copy.onclick =
+            async function(){
+
+                try{
+
+                    await navigator.clipboard
+                        .writeText(text);
+
+                    copy.textContent =
+                        "✅ Copied!";
+
+                    setTimeout(()=>{
+
+                        copy.textContent =
+                            "📋 Copy";
+
+                    },1200);
+
+                }catch(error){
+
+                    copy.textContent =
+                        "Copy failed";
+
+                }
+
+            };
+
+        wrap.appendChild(copy);
+    }
+
+
+    message.appendChild(wrap);
+
+    chatBox.appendChild(message);
+
+    chatBox.scrollTop =
+        chatBox.scrollHeight;
+}
+
+
+/* =========================================================
+   TYPING
+   ========================================================= */
+
+function showTyping(){
+
+    const chatBox =
+        document.getElementById("chatBox");
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        "message ai";
+
+    message.id =
+        "typingMessage";
+
+    message.innerHTML = `
+        <div class="bubble-wrap">
+
+            <div class="sender">
+                🤖 Khankir Chele AI
+            </div>
+
+            <div class="bubble">
+
+                <div class="typing">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+    chatBox.appendChild(message);
+
+    chatBox.scrollTop =
+        chatBox.scrollHeight;
+}
+
+
+/* =========================================================
+   REMOVE TYPING
+   ========================================================= */
+
+function removeTyping(){
+
+    const typing =
+        document.getElementById(
+            "typingMessage"
+        );
+
+    if(typing){
+        typing.remove();
+    }
+}
+
+
+/* =========================================================
+   SAVE CHAT
+   ========================================================= */
+
+function saveChat(){
+
+    const chatBox =
+        document.getElementById(
+            "chatBox"
+        );
+
+    localStorage.setItem(
+        "khankirCheleChat",
+        chatBox.innerHTML
+    );
+}
+
+
+/* =========================================================
+   LOAD CHAT
+   ========================================================= */
+
+function loadChat(){
+
+    const chatBox =
+        document.getElementById(
+            "chatBox"
+        );
+
+    const saved =
+        localStorage.getItem(
+            "khankirCheleChat"
+        );
+
+
+    if(saved){
+
+        chatBox.innerHTML =
+            saved;
+
+
+        document
+            .querySelectorAll(".copy-btn")
+            .forEach(button=>{
+
+                const bubble =
+                    button
+                    .parentElement
+                    .querySelector(".bubble");
+
+                if(!bubble) return;
+
+                const text =
+                    bubble.textContent;
+
+
+                button.onclick =
+                    async ()=>{
+
+                        try{
+
+                            await navigator
+                                .clipboard
+                                .writeText(text);
+
+                            button.textContent =
+                                "✅ Copied!";
+
+                            setTimeout(()=>{
+
+                                button.textContent =
+                                    "📋 Copy";
+
+                            },1200);
+
+                        }catch(e){}
+
+                    };
+
+            });
+
+    }else{
+
+        addMessage(
+            "ওয়েলকাম টু খানকির ছেলে AI তে 😊\n\nআমাকে কিছু জিজ্ঞেস করো। বাংলা, Banglish অথবা English—যে ভাষায় প্রশ্ন করবে, সেই ভাষায় উত্তর দেওয়ার চেষ্টা করব। 🤖",
+            "ai"
+        );
+
+    }
+}
+
+
+/* =========================================================
+   SEND MESSAGE
+   ========================================================= */
+
+function sendMessage(){
+
+    const input =
+        document.getElementById(
+            "userInput"
+        );
+
+    const text =
+        input.value.trim();
+
+    if(!text) return;
+
+
+    addMessage(
+        text,
+        "user"
+    );
+
+    input.value = "";
+
+    input.style.height =
+        "58px";
+
+
+    const language =
+        detectLanguage(text);
+
+
+    const response =
+        findDefaultResponse(text);
+
+
+    showTyping();
+
+
+    const delay =
+        450 +
+        Math.floor(
+            Math.random() * 500
+        );
+
+
+    setTimeout(()=>{
+
+        removeTyping();
+
+        let answer;
+
+
+        if(response){
+
+            answer =
+                getResponse(
+                    response,
+                    language
+                );
+
+        }else{
+
+            answer =
+                getFallback(
+                    language
+                );
+
+        }
+
+
+        addMessage(
+            answer,
+            "ai"
+        );
+
+        saveChat();
+
+    },delay);
+
+}
+
+
+/* =========================================================
+   ENTER KEY
+   ========================================================= */
+
+function handleKey(event){
+
+    if(
+        event.key === "Enter" &&
+        !event.shiftKey
+    ){
+
+        event.preventDefault();
+
+        sendMessage();
+    }
+}
+
+
+/* =========================================================
+   CLEAR CHAT
+   ========================================================= */
+
+function clearChat(){
+
+    const confirmClear =
+        confirm(
+            "সব chat মুছে ফেলতে চান?"
+        );
+
+    if(!confirmClear) return;
+
+
+    localStorage.removeItem(
+        "khankirCheleChat"
+    );
+
+
+    document.getElementById(
+        "chatBox"
+    ).innerHTML = "";
+
+
+    addMessage(
+        "ওয়েলকাম টু খানকির ছেলে AI তে 😊\n\nআবার শুরু করি! কিছু জিজ্ঞেস করো। 🤖",
+        "ai"
+    );
+
+
+    saveChat();
+}
+
+
+/* =========================================================
+   TEXTAREA AUTO HEIGHT
+   ========================================================= */
+
+const input =
+    document.getElementById(
+        "userInput"
+    );
+
+input.addEventListener(
+    "input",
+    function(){
+
+        this.style.height =
+            "auto";
+
+        this.style.height =
+            Math.min(
+                this.scrollHeight,
+                130
+            ) + "px";
+
+    }
+);
+
+
+/* =========================================================
+   BUTTON EVENTS
+   ========================================================= */
+
+document
+    .getElementById("sendBtn")
+    .addEventListener(
+        "click",
+        sendMessage
+    );
+
+
+document
+    .getElementById("clearBtn")
+    .addEventListener(
+        "click",
+        clearChat
+    );
+
+
+input.addEventListener(
+    "keydown",
+    handleKey
+);
+
+
+/* =========================================================
+   START APP
+   ========================================================= */
+
+loadChat();
+
+</script>
+
+</body>
+</html>
